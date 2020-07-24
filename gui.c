@@ -8,7 +8,22 @@ void print_board(Game *g)
         printf("%c%s", (j==g->c) ? 'v' : ' ', (j==g->columns-1) ? "\n" : " "); 
     for (int i=0;i<g->rows;i++)
         for (int j=0;j<g->columns;j++)
-            printf("%d%s", g->board[i][j], (j==g->columns-1) ? "\n" : " ");
+            switch (g->board[i][j]) {
+                case 0:
+                    printf("%c%s", ' ', (j==g->columns-1) ? "|\n" : " ");
+                    break;
+                case 1:
+                    printf(ANSI_COLOR_RED "%c" ANSI_COLOR_RESET, 'o');
+                    printf("%s", (j==g->columns-1) ? "|\n" : " "); 
+                    break;
+                case 2:
+                    printf(ANSI_COLOR_YELLOW "%c" ANSI_COLOR_RESET, 'o');
+                    printf("%s", (j==g->columns-1) ? "|\n" : " "); 
+                    break;
+            }
+    for (int j=0;j<g->columns;j++)
+        printf("--");
+    printf("\n");
 }
 
 
