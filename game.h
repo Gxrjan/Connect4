@@ -20,7 +20,7 @@ typedef struct game {
     int len;
     int player;
     int winner;
-    Array *win_coords;
+    Coordinate *win_coords;
     int c;
 } Game;
 
@@ -30,3 +30,4 @@ void init_board(Matrix *board, int rows, int columns);
 void print_board(Game *g);
 int move_cursor(Game *g, char d);
 int make_move(Game *g);
+int all(Game *g, int i, int j, int di, int dj);
