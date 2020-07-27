@@ -31,3 +31,6 @@ void print_board(Game *g);
 int move_cursor(Game *g, char d);
 int make_move(Game *g);
 int all(Game *g, int i, int j, int di, int dj);
+int game_won(Game *g);
+void start(Game *g);
+int valid(Game *g, int i, int j);

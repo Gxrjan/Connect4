@@ -140,33 +140,6 @@ int main(int argc, char *argv[])
     int len = atoi(argv[3]);
     Game g;
     init(&g, rows, columns, len);
-    //printf("rows: %d, columns: %d\n", g.rows, g.columns);
-    //printf("len: %d\n", g.len);
-    //printf("Player: %d\n", g.player);
-    //print_board(&g);
-    //move_cursor(&g, 'r');
-    //make_move(&g);
-    //print_board(&g);
-    //char command;
-    //system("clear");
-    //print_board(&g);
-    //while (1) {
-    //    command = getch();
-    //    switch (command) {
-    //        case 'a':
-    //            move_cursor(&g, 'l');
-    //            break;
-    //        case 'd':
-    //            move_cursor(&g, 'r');
-    //            break;
-    //        case 's':
-    //            make_move(&g);
-    //            break;
-    //    }
-    //    system("clear");
-    //    print_board(&g);
-
-    //}
     start(&g);
     return 0;
 }
