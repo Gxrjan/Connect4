@@ -108,7 +108,7 @@ void start(Game *g)
                 if (game_won(g)) {
                     system("clear");
                     print_board(g);
-                    printf("Playaer %d won!\n", g->player);
+                    printf("Player %d won!\n", g->player);
                     return;
                 }
                 g->player = (g->player==1) ? 2 : 1;

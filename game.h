@@ -34,3 +34,6 @@ int all(Game *g, int i, int j, int di, int dj);
 int game_won(Game *g);
 void start(Game *g);
 int valid(Game *g, int i, int j);
+void start_server(Game *g, int fd);
+void start_client(Game *g, int fd);
+
