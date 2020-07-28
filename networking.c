@@ -1,9 +1,40 @@
 #include "headers.c"
 #include<errno.h>
+#include<stdlib.h>
 #define PORT "5000"
 #define BACKLOG 10
-#include "game.h"
-#include<stdlib.h>
+
+int setup_client(char *hostname) {
+    int status;
+    struct addrinfo hints;
+    struct addrinfo *servinfo;
+    int fd;
+    memset(&hints, 0, sizeof(struct addrinfo));
+    hints.ai_family = AF_UNSPEC;
+    hints.ai_socktype = SOCK_STREAM;
+
+    status = getaddrinfo(hostname, "5000", &hints, &servinfo);
+
+    if (status != 0) {
+        fprintf(stderr, "getaddrinfo  error: %s\n", gai_strerror(status));
+        exit(1);
+    }
+
+    fd = socket(servinfo->ai_family, servinfo->ai_socktype, servinfo->ai_protocol);
+    if (fd < 0) {
+        fprintf(stderr, "Error creating a socket\n");
+        return 1;
+    }
+
+    status = connect(fd, servinfo->ai_addr, servinfo->ai_addrlen);
+    if (status < 0) {
+        fprintf(stderr, "Error trying to connect\n");
+        return 1;
+    }
+    freeaddrinfo(servinfo);
+    return fd; 
+}
+
 
 int setup_server()
 {
@@ -53,29 +84,3 @@ int setup_server()
     
 }
 
-
-int main(int argc, char *argv[])
-{
-    if (argc != 4) {
-        fprintf(stderr, "Usage: server rows columns len\n");
-        return 1;
-    }
-    int rows = atoi(argv[1]);
-    int columns = atoi(argv[2]);
-    int len = atoi(argv[3]);
-    Game g;
-    init(&g, rows, columns, len);
-
-    int commfd = setup_server();
-    int first_message[3] = { rows, columns, len};
-    size_t fst_msg_len = sizeof(first_message);
-    int first_bytes_sent;
-    first_bytes_sent = send(commfd, first_message, fst_msg_len, 0);
-    if (first_bytes_sent < fst_msg_len) {
-       fprintf(stderr, "Couldn't send all of attributes of a game\n");
-       return 1;
-    }
-      
-    start_server(&g, commfd);
-    return 0;
-}

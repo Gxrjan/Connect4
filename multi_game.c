@@ -91,43 +91,6 @@ int all(Game *g, int i, int j, int di, int dj)
 }
 
 
-void start(Game *g)
-{
-    char command;
-    system("clear");
-    print_board(g);
-    while (1) {
-        command = getch();
-        switch (command) {
-            case 'a':
-                move_cursor(g, 'l');
-                break;
-            case 'd':
-                move_cursor(g, 'r');
-                break;
-            case 's':
-                make_move(g);
-                if (game_won(g)) {
-                    system("clear");
-                    print_board(g);
-                    printf("Player %d won!\n", g->player);
-                    return;
-                }
-                g->player = (g->player==1) ? 2 : 1;
-                break;
-            default:
-                system("clear");
-                print_board(g);
-                printf("'a' to move left, 'd' to move left, 's' to make a move\n");
-                continue;
-        }
-        system("clear");
-        print_board(g);
-
-    }
-    
-}
-
 
 void start_server(Game *g, int fd)
 {

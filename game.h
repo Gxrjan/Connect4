@@ -36,4 +36,6 @@ void start(Game *g);
 int valid(Game *g, int i, int j);
 void start_server(Game *g, int fd);
 void start_client(Game *g, int fd);
+int setup_server();
+int setup_client(char *hostname);
 
