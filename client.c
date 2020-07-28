@@ -34,6 +34,7 @@ int setup_client(char *hostname) {
         fprintf(stderr, "Error trying to connect\n");
         return 1;
     }
+    freeaddrinfo(servinfo);
     return fd; 
 }
 
@@ -55,15 +56,11 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Server closed connection\n");
         return 1;
     }
-    //printf("Rows: %d\n", game_attrs[0]);
-    //printf("Columns: %d\n", game_attrs[1]);
-    //printf("Len: %d\n", game_attrs[2]);
     Game g;
     init(&g, game_attrs[0], game_attrs[1], game_attrs[2]);
 
     start_client(&g, fd);
 
 
-    //freeaddrinfo(servinfo);
 
 }

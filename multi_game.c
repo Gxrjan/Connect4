@@ -196,7 +196,7 @@ void start_server(Game *g, int fd)
 
 void start_client(Game *g, int fd)
 {
-    g->player = 2;
+    //g->player = 2;
     int out_cmd;
     size_t out_cmd_len;
     int bytes_sent;

@@ -47,6 +47,8 @@ int setup_server()
         fprintf(stderr, "Error accepting\n");
         return 1;
     }
+
+    freeaddrinfo(serv_info);
     return commfd;
     
 }
