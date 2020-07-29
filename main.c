@@ -14,6 +14,8 @@ int main(int argc, char *argv[])
     }
     if (argc == 2) {
         int fd = setup_client(argv[1]);
+        if (fd < 0)
+            return 1;
         int game_attrs[3];
         int game_attrs_len = recv(fd, &game_attrs, sizeof(game_attrs), 0);
         if (game_attrs_len < 0) {
@@ -33,6 +35,8 @@ int main(int argc, char *argv[])
         init(&g, rows, columns, len);
 
         int commfd = setup_server();
+        if (commfd < 0)
+            return 1;
         int first_message[3] = { rows, columns, len};
         size_t fst_msg_len = sizeof(first_message);
         int first_bytes_sent;

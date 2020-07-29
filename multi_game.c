@@ -127,7 +127,7 @@ void start_server(Game *g, int fd)
             default:
                 system("clear");
                 print_board(g);
-                printf("'a' to move left, 'd' to move left, 's' to make a move\n");
+                printf("'a' to move left, 'd' to move right, 's' to make a move\n");
                 continue;
         }
         system("clear");

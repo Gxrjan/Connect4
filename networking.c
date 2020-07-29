@@ -17,19 +17,19 @@ int setup_client(char *hostname) {
 
     if (status != 0) {
         fprintf(stderr, "getaddrinfo  error: %s\n", gai_strerror(status));
-        exit(1);
+        return -1;
     }
 
     fd = socket(servinfo->ai_family, servinfo->ai_socktype, servinfo->ai_protocol);
     if (fd < 0) {
         fprintf(stderr, "Error creating a socket\n");
-        return 1;
+        return -1;
     }
 
     status = connect(fd, servinfo->ai_addr, servinfo->ai_addrlen);
     if (status < 0) {
         fprintf(stderr, "Error trying to connect\n");
-        return 1;
+        return -1;
     }
     freeaddrinfo(servinfo);
     return fd; 
@@ -51,32 +51,32 @@ int setup_server()
     status = getaddrinfo(NULL, PORT, &hints, &serv_info);
     if (status != 0) {
         fprintf(stderr, "getaddrinfo error: %s\n", gai_strerror(status));
-        return 1;
+        return -1;
     }
     
     sockfd = socket(serv_info->ai_family, serv_info->ai_socktype, serv_info->ai_protocol);
     if (sockfd < 0) {
         fprintf(stderr, "Error creating a socket\n");
-        return 1;
+        return -1;
     }
 
     status = bind(sockfd, serv_info->ai_addr, serv_info->ai_addrlen);
     if (status < 0) {
         fprintf(stderr, "Error while creating a bind\n");
-        return 1;
+        return -1;
     }
 
     status = listen(sockfd, BACKLOG);
     if (status < 0) {
         fprintf(stderr, "Error while trying to listen\n");
-        return 1;
+        return -1;
     }
     
     client_size = sizeof(client);
     commfd = accept(sockfd, (struct sockaddr *)&client, &client_size);
     if (commfd < 0) {
         fprintf(stderr, "Error accepting\n");
-        return 1;
+        return -1;
     }
 
     freeaddrinfo(serv_info);
