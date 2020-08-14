@@ -8,8 +8,7 @@ int main(int argc, char *argv[])
 {
     Game g;
     if (argc != 4 && argc != 2) {
-        fprintf(stderr, "Server Usage: connect4 rows columns len\n\
-                        Client Usage: connect4 hostname");
+        fprintf(stderr, "Server Usage: connect4 rows columns len\nClient Usage: connect4 hostname\n");
         return 1;
     }
     if (argc == 2) {

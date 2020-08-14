@@ -29,6 +29,7 @@ int setup_client(char *hostname) {
     status = connect(fd, servinfo->ai_addr, servinfo->ai_addrlen);
     if (status < 0) {
         fprintf(stderr, "Error trying to connect\n");
+        printf("%s\n", strerror(errno));
         return -1;
     }
     freeaddrinfo(servinfo);
